@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  {% include 'HTML/LOGIN/login_style.html' %}
+</head>
+<body>
+<div class="container">
+    <form action="#">
+      <h2>Login</h2>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <input type="submit" value="Login">
+      <input type="button" value="Sign Up" onclick="showSignUpForm()">
+    </form>
+  </div>
+  <div class="container" id="signup-form" style="display: none;">
+<form action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+  <h2>Sign Up</h2>
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="newPassword" required>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" onchange="checkPasswordMatch()" required>
+      </div>
+      <input type="submit" value="Submit">
+      <input type="button" value="Cancel" onclick="hideSignUpForm()">
+    </form>
+  </div>
+  <script>
+    function showSignUpForm() {
+      document.getElementById("signup-form").style.display = "block";
+    }
+    function hideSignUpForm() {
+      document.getElementById("signup-form").style.display = "none";
+    }
+    function checkPasswordMatch() {
+      var newPassword = document.getElementById("newPassword").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+      if (newPassword != confirmPassword) {
+        alert("Password doesn't match");
+        document.getElementById("confirmPassword").value = "";
+      }
+    }  </script>
