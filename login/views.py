@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from login.models import users
 
 
 # Create your views here.
@@ -13,4 +14,5 @@ def signup(request):
     email = request.POST.get('email')
     password = request.POST.get('confirmPassword')
     user = {'firstName': firstname, 'lastName': lastname, 'email': email, 'confirmPassword': password}
-    return render(request, '/Test.html', user)
+    users.objects.create(first_name=firstname, last_name=lastname, email=email, password=password)
+    return render(request, 'Test.html', user)
