@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Account Created</title>
+  {% include 'HTML/LOGIN/style_message_inscription.html' %}
+
+</head>
+<body>
+	<div class="message">
+<form action="{% url 'login' %}" method="post">
+	    {% csrf_token %}
+
+		<p>Your account has been created successfully!</p>
+		<button class="button" >Login</button>
+</form>
+	</div>
+
+</body>
+</html>

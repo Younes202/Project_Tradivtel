@@ -6,11 +6,15 @@
 </head>
 <body>
 <div class="container">
+<form action="{% url 'authentication' %}" method="post">
+        {% csrf_token %}
+
 
       <h2>Login</h2>
+    <p id="colorit"> {{message}} </p>
       <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="email" id="mail" name="email" required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
@@ -19,6 +23,7 @@
       <input type="submit" value="Login">
       <input type="button" value="Sign Up" onclick="showSignUpForm()">
     </form>
+    <p id="colorsec">{{messagelog}}</P>
   </div>
 <div class="container" id="signup-form" style="display: none;">
 <form action="{% url 'signup' %}" method="post">
