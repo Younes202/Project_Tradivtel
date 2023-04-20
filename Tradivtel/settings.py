@@ -131,4 +131,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # pour tester en local, imprime les courriels dans la console
-DEFAULT_FROM_EMAIL = 'younessghyer642@gmail.com' # l'adresse courriel par défaut pour les courriels envoyés par l'application
+DEFAULT_FROM_EMAIL = '' # l'adresse courriel par défaut pour les courriels envoyés par l'application
