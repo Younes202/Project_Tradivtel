@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+    </tr>
+  </thead>
+  <tbody>
+         <div class="mb-3">
+  <label for="specialty" class="form-label">Spécialité *</label>
+
+
+<select class="form-select" id="specialty" name="specialty_id" required>
+    <option value="" disabled selected>Choisir une spécialité</option>
+    {% for speciality in specialities %}
+      <option value="{{ speciality.id }}">{{ speciality.name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+  </tbody>
+</table>
+
+</body>
+</html>

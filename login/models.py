@@ -7,3 +7,24 @@ class users(models.Model):
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
 
+
+class Specialite(models.Model):
+    class Meta:
+        db_table = 'specialite'
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Technician(models.Model):
+    class Meta:
+        db_table = 'technician'
+    fullname = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    telephone = models.CharField(max_length=255)
+    specialite = models.ForeignKey(Specialite, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.fullname

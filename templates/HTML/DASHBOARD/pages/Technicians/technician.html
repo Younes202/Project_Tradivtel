@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Technicien</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+	<!-- CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- JS (jQuery and Popper.js are required dependencies) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-1fBghp+e5J5U6O5Ux3QOoj+3BZmbYI+rt7VJ3Q2geL3qyHlD8BCG+R1Rg/KAYXbt" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<!-- My CSS -->
+  {% include 'HTML/DASHBOARD/style.html' %}
+
+</head>
+<body>
+<main>
+
+
+  <!--- Sidebar-->
+
+	<section id="sidebar">
+  	  {% include 'HTML/DASHBOARD/sidebar.html' %}
+	</section>
+	<section id="content">
+
+  <!--Navbar -->
+      {% include 'HTML/DASHBOARD/navbar.html' %}
+
+
+
+
+  <main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Tableau de bord</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Tableau de bord</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="">Techniciens</a>
+						</li>
+					</ul>
+				</div>
+
+				<a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Telecharger .xcl</span>
+				</a>
+
+			</div>
+
+			<ul class="box-info">
+
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>{{technicians_number}}</h3>
+						<p>Techniciens</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>{{speciality_number}}</h3>
+						<p>Spécialité</p>
+					</span>
+				</li>
+
+			</ul>
+
+
+<button class="btn btn-primary sm-btn" data-toggle="modal" data-target="#add-special-modal">Ajouter une Spécialité</button>
+<button class="btn btn-primary sm-btn" data-toggle="modal" data-target="#add-technician-modal">Ajouter un Technicien</button>
+
+
+
+
+      <!-- Spec-->
+
+
+      			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Spécialité:</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th style="font-size: 20px;">Nom de Spécialité </th>
+								<th style="font-size: 20px;">Description </th>
+								<th style="font-size: 20px;"> Action </th>
+								<th>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+  {% for speciality in specialities %}
+    <tr>
+      <td>{{ speciality.name }}</td>
+      <td>{{ speciality.description }}</td>
+
+      <td>
+<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ speciality.id }}">Modifier</a>
+<a type="submit" class="btn btn-danger" href="{% url 'delete_speciality' speciality.id %}">Supprimer</a>
+	  </td>
+    </tr>
+    {% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+<!--Speciality !-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Techniciens:</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th style="font-size: 20px;">Nom complet </th>
+								<th style="font-size: 20px;">E-Mail</th>
+								<th style="font-size: 20px;">Telephone</th>
+								<th style="font-size: 20px;">spécialité </th>
+								<th style="font-size: 20px;"> Action </th>
+								<th>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+  {% for technician in technicians %}
+    <tr>
+      <td>{{ technician.fullname }}</td>
+      <td>{{ technician.email }}</td>
+      <td>{{ technician.telephone }}</td>
+      <td>{{ technician.specialite.name }}</td>
+      <td>
+<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ technician.id }}">Modifier</a>
+<a type="submit" class="btn btn-danger" href="{% url 'delete_technician' technician.id %}">Supprimer</a>
+	  </td>
+    </tr>
+    {% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+	</main>
+	</section>
+
+
+
+	<!-- Modal for adding a new speciality -->
+<div class="modal fade" id="add-special-modal" tabindex="-1" role="dialog" aria-labelledby="add-special-modal-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-special-modal-label">Ajouter une Spécialité</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<form action="{% url 'add_special' %}" method="POST">
+  {% csrf_token %}
+	<div class="form-group">
+            <label for="speciality-name-input">Nom de la spécialité</label>
+            <input type="text" class="form-control" id="speciality-name-input" name="specialtyName">
+          </div>
+          <div class="form-group">
+            <label for="speciality-description-input">Description de la spécialité</label>
+            <textarea class="form-control" id="speciality-description-input" name="specialtyDescription"></textarea>
+          </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+		        </form>
+
+	  </div></div>
+  </div>
+</div>
+
+
+	<!-- Modal for adding a new technician -->
+<div class="modal fade" id="add-technician-modal" tabindex="-1" role="dialog" aria-labelledby="add-technician-modal-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-technician-modal-label">Ajouter un Technicien</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<form action="{% url 'add_technician' %}" method="POST">
+  {% csrf_token %}
+	<div class="form-group">
+            <label for="technician-fullname-input">Nom complet du technicien</label>
+            <input type="text" class="form-control" id="technician-fullname-input" name="technician_fullname">
+          </div>
+          <div class="form-group">
+            <label for="technician-email-input">Adresse email du technicien</label>
+            <input type="email" class="form-control" id="technician-email-input" name="technician_email">
+          </div>
+          <div class="form-group">
+            <label for="technician-telephone-input">Numéro de téléphone du technicien</label>
+            <input type="text" class="form-control" id="technician-telephone-input" name="technician_telephone">
+		  </div>
+
+			  <div class="form-group">
+  <label for="specialty" class="form-label">Spécialité *</label>
+
+
+<select class="form-select" id="specialty" name="specialty_id" required>
+    <option value="" disabled selected>Choisir une spécialité</option>
+    {% for speciality in specialities %}
+      <option value="{{ speciality.id }}">{{ speciality.name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+</form>
+	  </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+	<!-- edit !-->
+
+
+	{% for technician in technicians %}
+  <div class="modal fade" id="editModal{{ technician.id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ technician.id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel{{ technician.id }}">Modifier le technicien {{ technician.fullname }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'edit_technician' technician.id %}" method="post">
+          {% csrf_token %}
+          <div class="modal-body">
+            <!-- Edit form fields go here -->
+            <div class="form-group">
+              <label for="fullname">Nom complet:</label>
+              <input type="text" class="form-control" id="fullname" name="fullname" value="{{ technician.fullname }}">
+            </div>
+            <div class="form-group">
+              <label for="email">E-Mail:</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ technician.email }}">
+            </div>
+            <div class="form-group">
+              <label for="telephone">Téléphone:</label>
+              <input type="tel" class="form-control" id="telephone" name="telephone" value="{{ technician.telephone }}">
+            </div>
+            <div class="form-group">
+              <label for="speciality">Spécialité:</label>
+              <select class="form-control" id="specialite" name="speciality_id">
+                {% for specialite in specialities %}
+
+                  {% if specialite == technician.specialite %}
+                    <option value="{{ specialite.id }}" selected>{{ specialite.name }}</option>
+                  {% else %}
+                    <option value="{{ specialite.id }}">{{ specialite.name }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+
+		<script src="script.js"></script>
+
+
+
+</body>
+</html>
