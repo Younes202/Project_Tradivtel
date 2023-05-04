@@ -45,8 +45,9 @@ def technician(request):
     speciality_number = Specialite.objects.count()
     technicians = Technician.objects.all()
     technicians_number = Technician.objects.count()
+    technician_specialities = technicians.values_list('specialite_id', flat=True)
     context = {'specialities': specialities, 'speciality_number': speciality_number, 'technicians': technicians,
-               'technicians_number': technicians_number}
+               'technicians_number': technicians_number, 'technician_specialities': technician_specialities}
 
     return render(request, 'HTML/DASHBOARD/pages/Technicians/technician.html', context)
 
@@ -103,3 +104,15 @@ def delete_speciality(request, speciality_id):
     speciality = Specialite.objects.get(id=speciality_id)
     speciality.delete()
     return redirect('technician')
+
+
+def edit_speciality(request, speciality_id):
+    speciality = Specialite.objects.get(id=speciality_id)
+
+    if request.method == 'POST':
+        speciality.name = request.POST.get('name')
+        speciality.description = request.POST.get('description')
+        speciality.save()
+        return redirect('technician')
+    context = {'speciality': speciality}
+    return render(request, 'HTML/DASHBOARD/pages/Technicians/edit_speciality.html', context)

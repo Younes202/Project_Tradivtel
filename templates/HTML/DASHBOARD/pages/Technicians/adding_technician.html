@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="modal fade" id="add-technician-modal" tabindex="-1" role="dialog" aria-labelledby="add-technician-modal-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-technician-modal-label">Ajouter un Technicien</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<form action="{% url 'add_technician' %}" method="POST">
+  {% csrf_token %}
+	<div class="form-group">
+            <label for="technician-fullname-input">Nom complet du technicien</label>
+            <input type="text" class="form-control" id="technician-fullname-input" name="technician_fullname">
+          </div>
+          <div class="form-group">
+            <label for="technician-email-input">Adresse email du technicien</label>
+            <input type="email" class="form-control" id="technician-email-input" name="technician_email">
+          </div>
+          <div class="form-group">
+            <label for="technician-telephone-input">Numéro de téléphone du technicien</label>
+            <input type="text" class="form-control" id="technician-telephone-input" name="technician_telephone">
+		  </div>
+
+			  <div class="form-group">
+  <label for="specialty" class="form-label">Spécialité *</label>
+
+
+<select class="form-select" id="specialty" name="specialty_id" required>
+    <option value="" disabled selected>Choisir une spécialité</option>
+    {% for speciality in specialities %}
+      <option value="{{ speciality.id }}">{{ speciality.name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+</form>
+	  </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for speciality in specialities %}
+  <div class="modal fade" id="editModal{{ speciality.id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ speciality.id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel{{ technician.id }}">Modifier la Spécialité {{ speciality.name }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'edit_speciality' speciality.id %}" method="post">
+          {% csrf_token %}
+          <div class="modal-body">
+            <!-- Edit form fields go here -->
+            <div class="form-group">
+              <label for="name">Nom complet:</label>
+              <input type="text" class="form-control" id="name" name="name" value="{{ speciality.name }}">
+            </div>
+            <div class="form-group">
+              <label for="desc">E-Mail:</label>
+              <input type="text" class="form-control" id="description" name="description" value="{{ speciality.description }}">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+</body>
+</html>

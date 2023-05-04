@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for technician in technicians %}
+  <div class="modal fade" id="editModal{{ technician.id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ technician.id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel{{ technician.id }}">Modifier le technicien {{ technician.fullname }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'edit_technician' technician.id %}" method="post">
+          {% csrf_token %}
+          <div class="modal-body">
+            <!-- Edit form fields go here -->
+            <div class="form-group">
+              <label for="fullname">Nom complet:</label>
+              <input type="text" class="form-control" id="fullname" name="fullname" value="{{ technician.fullname }}">
+            </div>
+            <div class="form-group">
+              <label for="email">E-Mail:</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ technician.email }}">
+            </div>
+            <div class="form-group">
+              <label for="telephone">Téléphone:</label>
+              <input type="tel" class="form-control" id="telephone" name="telephone" value="{{ technician.telephone }}">
+            </div>
+            <div class="form-group">
+              <label for="speciality">Spécialité:</label>
+              <select class="form-control" id="specialite" name="speciality_id">
+                {% for specialite in specialities %}
+
+                  {% if specialite == technician.specialite %}
+                    <option value="{{ specialite.id }}" selected>{{ specialite.name }}</option>
+                  {% else %}
+                    <option value="{{ specialite.id }}">{{ specialite.name }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</body>
+</html>
