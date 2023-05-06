@@ -21,9 +21,6 @@
   <!--Navbar -->
       {% include 'HTML/DASHBOARD/navbar.html' %}
 
-
-
-
   <main>
 			<div class="head-title">
 				<div class="left">
@@ -89,75 +86,67 @@
 							</tr>
 						</thead>
 						<tbody>
-  {% for speciality in specialities %}
-    <tr>
-      <td>{{ speciality.name }}</td>
-      <td>{{ speciality.description }}</td>
+  					{% for speciality in specialities %}
+						   <tr>
+							   <td>{{ speciality.name }}</td>
+							  	<td>{{ speciality.description }}</td>
+							<div>
+								<td>
+								{% if speciality.id in technician_specialities %}
+									<button class="btn btn-primary text-muted">Modifier</button>
+									<button class="btn btn-danger text-muted">Supprimer</button>
+							    {% else %}
+								<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ speciality.id }}">Modifier</a>
+								<a type="submit" class="btn btn-danger" href="{% url 'delete_speciality' speciality.id %}">Supprimer</a>
+								{% endif %}
+						  		</td>
+							</div>
 
-	<div >
-					        <td>
-
-    <!-- your content here -->
-<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ speciality.id }}" class="{% if speciality.id in technician_specialities %}text-danger{% else %}text-danger{% endif %}">Modifier</a>
-		<a type="submit" class="btn btn-danger" href="{% url 'delete_speciality' speciality.id %}"       class="{% if speciality.id in technician_specialities %}text-danger{% else %}text-success{% endif %}">Supprimer</a>
-											</td>
-
-	</div>
-
-
-
-    </tr>
-    {% endfor %}
-
-						</tbody>
-					</table>
-
-
-
-
-
-
-				</div>
-
-			</div>
-<!--Speciality table !-->
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Techniciens:</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-	<table>
-						<thead>
-							<tr>
-								<th style="font-size: 20px;">Nom complet </th>
-								<th style="font-size: 20px;">E-Mail</th>
-								<th style="font-size: 20px;">Telephone</th>
-								<th style="font-size: 20px;">spécialité </th>
-								<th style="font-size: 20px;"> Action </th>
-								<th>
-								</th>
 							</tr>
-						</thead>
-						<tbody>
-  {% for technician in technicians %}
-    <tr>
-      <td>{{ technician.fullname }}</td>
-      <td>{{ technician.email }}</td>
-      <td>{{ technician.telephone }}</td>
-      <td>{{ technician.specialite.name }}</td>
-      <td>
-<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ technician.id }}">Modifier</a>
-<a type="submit" class="btn btn-danger" href="{% url 'delete_technician' technician.id %}">Supprimer</a>
-	  </td>
-    </tr>
-    {% endfor %}
+							{% endfor %}
 
-						</tbody>
-					</table>				</div>
+							</tbody>
+					</table>
+				</div>
+							</div>
+				<!--Speciality table !-->
+							<div class="table-data">
+								<div class="order">
+									<div class="head">
+										<h3>Techniciens:</h3>
+										<i class='bx bx-search' ></i>
+										<i class='bx bx-filter' ></i>
+									</div>
+					<table>
+										<thead>
+											<tr>
+												<th style="font-size: 20px;">Nom complet </th>
+												<th style="font-size: 20px;">E-Mail</th>
+												<th style="font-size: 20px;">Telephone</th>
+												<th style="font-size: 20px;">spécialité </th>
+												<th style="font-size: 20px;"> Action </th>
+												<th>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+				  {% for technician in technicians %}
+					<tr>
+					  <td>{{ technician.fullname }}</td>
+					  <td>{{ technician.email }}</td>
+					  <td>{{ technician.telephone }}</td>
+					  <td>{{ technician.specialite.name }}</td>
+					  <td>
+				<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ technician.id }}">Modifier</a>
+				<a type="submit" class="btn btn-danger" href="{% url 'delete_technician' technician.id %}">Supprimer</a>
+					  </td>
+					</tr>
+					{% endfor %}
 
-			</div>
+			</tbody>
+			</table>
+		</div>
+	</div>
 	</main>
 	</section>
 	  <!-- Modal for adding a new speciality -->
@@ -169,5 +158,7 @@
     	<!-- edit speciality !-->
       {% include 'HTML/DASHBOARD/pages/Technicians/edit_speciality.html' %}
 		<script src="script.js"></script>
+
 </body>
+
 </html>

@@ -42,12 +42,16 @@ def home(request):
 
 def technician(request):
     specialities = Specialite.objects.all()
+
     speciality_number = Specialite.objects.count()
     technicians = Technician.objects.all()
     technicians_number = Technician.objects.count()
+
     technician_specialities = technicians.values_list('specialite_id', flat=True)
+
     context = {'specialities': specialities, 'speciality_number': speciality_number, 'technicians': technicians,
-               'technicians_number': technicians_number, 'technician_specialities': technician_specialities}
+               'technicians_number': technicians_number, 'technician_specialities': technician_specialities,
+               }
 
     return render(request, 'HTML/DASHBOARD/pages/Technicians/technician.html', context)
 
