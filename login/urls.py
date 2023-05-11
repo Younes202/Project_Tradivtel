@@ -16,5 +16,8 @@ urlpatterns = [
     path('authentication/technician/deleteS/<int:speciality_id>/', views.delete_speciality, name='delete_speciality'),
     path('authentication/technician/editS/<int:speciality_id>/', views.edit_speciality, name='edit_speciality'),
     path('test/', views.test, name='test'),
+    path('authentication/technician/editS/<int:speciality_id>/', views.edit_speciality, name='edit_speciality'),
+    path('authentication/tache/', views.tache, name='tache'),
+
 
 ]

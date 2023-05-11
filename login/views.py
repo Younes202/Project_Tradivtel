@@ -55,7 +55,11 @@ def technician(request):
                'technicians_number': technicians_number, 'technician_specialities': technician_specialities,
                }
 
-    return render(request, 'HTML/DASHBOARD/pages/Technicians/technician.html', context)
+    return render(request, 'HTML/DASHBOARD/pages/Technicians/technician.html ', context)
+
+
+def tache(request):
+    return render(request, 'HTML/DASHBOARD/pages/Taches/tache.html')
 
 
 def add_special(request):

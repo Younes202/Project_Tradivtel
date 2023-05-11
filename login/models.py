@@ -11,6 +11,7 @@ class users(models.Model):
 class Specialite(models.Model):
     class Meta:
         db_table = 'specialite'
+
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
@@ -18,24 +19,19 @@ class Specialite(models.Model):
         return self.name
 
 
+class Equipe(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Technician(models.Model):
-    class Meta:
-        db_table = 'technician'
     fullname = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     telephone = models.CharField(max_length=255)
     specialite = models.ForeignKey(Specialite, on_delete=models.CASCADE)
+    equipe = models.ForeignKey(Equipe, on_delete=models.CASCADE, related_name='team_members', null=True, blank=True)
 
     def __str__(self):
         return self.fullname
-
-
-class Equipe(models.Model):
-    class Meta:
-        db_table = 'equipe'
-
-    name = models.CharField(max_length=255)
-    technician = models.ManyToManyField(Technician)
-
-    def __str__(self):
-        return self.name

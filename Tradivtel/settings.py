@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Tradivtel.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tradiv',
+        'NAME': 'tradivtel',
         'USER': 'postgres',
         'PASSWORD': 'missour.1422',
         'HOST': 'localhost',
