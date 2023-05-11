@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Technicien</title>
-
-  {% include 'HTML/DASHBOARD/pages/Header.html' %}
+    <title>Tache & Equipe</title>
+    {% include 'HTML/DASHBOARD/pages/Header.html' %}
 
 </head>
 <body>
-<main>
 
 
   <!--- Sidebar-->
@@ -19,8 +17,7 @@
 
   <!--Navbar -->
       {% include 'HTML/DASHBOARD/navbar.html' %}
-
-  <main>
+        <main>
 			<div class="head-title">
 				<div class="left">
 					<h1>Tableau de bord</h1>
@@ -30,7 +27,7 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="">Techniciens</a>
+							<a class="active" href="">Tache</a>
 						</li>
 					</ul>
 				</div>
@@ -43,29 +40,29 @@
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>{{technicians_number}}</h3>
-						<p>Techniciens</p>
+						<h3>numbers</h3>
+						<p>Equipe</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>{{speciality_number}}</h3>
-						<p>Spécialité</p>
+						<h3></h3>
+						<p>Tache</p>
 					</span>
 				</li>
 
 			</ul>
 
 
-				<button class="btn btn-primary sm-btn" data-toggle="modal" data-target="#add-special-modal">Ajouter une Spécialité</button>
-				<button class="btn btn-primary sm-btn" data-toggle="modal" data-target="#add-technician-modal">Ajouter un Technicien</button>
+				<button class="btn btn-primary sm-btn" data-toggle="modal" data-target="#add-special-modal">Créer une équipe</button>
+				<button class="btn btn-primary sm-btn" data-toggle="modal" data-target="#add-technician-modal">Créer une tache</button>
 
       <!-- Table Speciality -->
       			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Spécialité:</h3>
+						<h3>Equipe</h3>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
@@ -73,10 +70,10 @@
 					<table>
 						<thead>
 							<tr>
-								<th style="font-size: 20px;">Nom de Spécialité </th>
-								<th style="font-size: 20px;">Description </th>
-								<th style="font-size: 20px;"> Action </th>
-
+								<th style="font-size: 20px;"> Nom de L'Equipe </th>
+								<th style="font-size: 20px;"> Technician </th>
+                                <th style="font-size: 20px;"> Specialite </th>
+                                <th style="font-size: 20px;"> Action </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -143,9 +140,9 @@
 		</div>
 	</div>
 	</main>
-	</section>
-		  {% include 'js/toastrs/insertion_toastr.js' %}
+    </section>
 
+      {% include 'js/toastrs/insertion_toastr.js' %}
 	  <!-- Modal for adding a new speciality -->
       {% include 'HTML/DASHBOARD/pages/Technicians/specialities/adding_speciality.html' %}
 	  <!-- Modal for adding a new technician -->
@@ -157,7 +154,5 @@
 	  {% include 'js/toastrs/delete_sewetAlert.js' %}
 		<script src="script.js"></script>
 
-
 </body>
-
 </html>

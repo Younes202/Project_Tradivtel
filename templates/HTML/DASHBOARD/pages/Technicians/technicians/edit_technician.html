@@ -15,8 +15,10 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{% url 'edit_technician' technician.id %}" method="post">
+        <form action="{% url 'edit_technician' technician.id %}" method="post" id="edit-technician-form" data-form-type="technicianE">
           {% csrf_token %}
+          <input type="hidden"  value="Les informations ont été modifiées avec succès !" id="messageET">
+
           <div class="modal-body">
             <!-- Edit form fields go here -->
             <div class="form-group">

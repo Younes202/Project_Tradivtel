@@ -15,16 +15,18 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{% url 'edit_speciality' speciality.id %}" method="post">
+        <form action="{% url 'edit_speciality' speciality.id %}" method="post" id="edit-special-form" data-form-type="specialE">
           {% csrf_token %}
+          <input type="hidden"  value="Les informations ont été modifiées avec succès !" id="messageES">
+
           <div class="modal-body">
             <!-- Edit form fields go here -->
             <div class="form-group">
-              <label for="name">Nom complet:</label>
+              <label for="name">Nom de la spécialité</label>
               <input type="text" class="form-control" id="name" name="name" value="{{ speciality.name }}">
             </div>
             <div class="form-group">
-              <label for="desc">E-Mail:</label>
+              <label for="desc">Description de la spécialité </label>
               <input type="text" class="form-control" id="description" name="description" value="{{ speciality.description }}">
             </div>
           </div>

@@ -28,3 +28,14 @@ class Technician(models.Model):
 
     def __str__(self):
         return self.fullname
+
+
+class Equipe(models.Model):
+    class Meta:
+        db_table = 'equipe'
+
+    name = models.CharField(max_length=255)
+    technician = models.ManyToManyField(Technician)
+
+    def __str__(self):
+        return self.name
