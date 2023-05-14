@@ -6,6 +6,7 @@ from django.views.decorators.http import require_http_methods
 from login.models import users
 from login.models import Specialite
 from login.models import Technician
+from login.models import Equipe
 
 
 # Create your views here.
@@ -54,12 +55,14 @@ def technician(request):
     context = {'specialities': specialities, 'speciality_number': speciality_number, 'technicians': technicians,
                'technicians_number': technicians_number, 'technician_specialities': technician_specialities,
                }
-
-    return render(request, 'HTML/DASHBOARD/pages/Technicians/technician.html ', context)
+    return render(request, 'HTML/DASHBOARD/pages/Technicians/technician.html', context)
 
 
 def tache(request):
-    return render(request, 'HTML/DASHBOARD/pages/Taches/tache.html')
+    technicians = Technician.objects.all()
+    equipes_number = Equipe.objects.count()
+    context = {'technicians': technicians, 'equipes_number': equipes_number}
+    return render(request, 'HTML/DASHBOARD/pages/Taches/tache.html', context)
 
 
 def add_special(request):
@@ -79,6 +82,23 @@ def add_technician(request):
         specialty_id = request.POST.get('specialty_id')
         Technician.objects.create(fullname=fullname, email=email, telephone=telephone, specialite_id=specialty_id)
         return redirect('technician')
+
+
+def add_equipe(request):
+        if request.method == 'POST':
+            equipe_name = request.POST['name']
+            technician_ids = request.POST.getlist('technicians')
+            equipe = Equipe.objects.create(name=equipe_name)
+            for technician_id in technician_ids:
+                technician = Technician.objects.get(id=technician_id)
+                if technician.equipe is None:
+                    technician.equipe = equipe
+                    technician.save()
+            return redirect('tache')
+
+        else:
+            technicians = Technician.objects.filter(equipe=None)
+        return render(request, 'add_equipe.html', {'technicians': technicians})
 
 
 def delete_technician(request, technician_id):

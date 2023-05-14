@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+
 {% for speciality in specialities %}
   <div class="modal fade" id="editModal{{ speciality.id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ speciality.id }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -17,7 +11,7 @@
         </div>
         <form action="{% url 'edit_speciality' speciality.id %}" method="post" id="edit-special-form" data-form-type="specialE">
           {% csrf_token %}
-          <input type="hidden"  value="Les informations ont été modifiées avec succès !" id="messageES">
+
 
           <div class="modal-body">
             <!-- Edit form fields go here -->
@@ -40,5 +34,3 @@
   </div>
 {% endfor %}
 
-</body>
-</html>

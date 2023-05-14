@@ -1,19 +1,22 @@
-<script>$(document).ready(function() {
-  $('#add-special-form, #add-technician-form, #edit-special-form, #edit-technician-form').on('submit', function(e) {
+<script>
+$(document).ready(function() {
+  $('#add-special-form, #add-technician-form, #edit-special-form, #edit-technician-form, #add-equipe-form').on('submit', function(e) {
     e.preventDefault();
     var form = $(this);
+    var success_message = "Les informations ont été enregistrées avec succès !";
+    var edit_message = "Les informations ont été modifiées avec succès ";
     var message;
     var formType = form.data('form-type');
-    if (formType == "specialA") {
-      message = $('#messageAS').val();
-    } else if (formType == "technicianA") {
-      message = $('#messageAT').val();
+    if (formType == "specialA" || formType == "technicianA" || formType == "equipeA") {
+      message = success_message;
     }
-    else if (formType == "specialE") {
-      message = $('#messageES').val();
-    } else if (formType == "technicianE") {
-      message = $('#messageET').val();
+    else if (formType == "specialE" ||  formType == "technicianE" ) {
+      message = edit_message;
     }
+    else{
+    alert("There is some problem");
+    }
+
 
     $.ajax({
       url: form.attr('action'),
