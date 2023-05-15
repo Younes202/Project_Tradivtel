@@ -13,6 +13,9 @@
           <div class="form-group">
             <label for="equipe-name-input">Nom de l'équipe</label>
             <input type="text" class="form-control" id="equipe-name-input" name="name" required>
+            {% if equipe_exists %}
+            <small class="form-text text-danger">Une équipe avec ce nom existe déjà.</small>
+            {% endif %}
           </div>
           <div class="form-group">
             <label for="equipe-technicians-select">Techniciens</label>

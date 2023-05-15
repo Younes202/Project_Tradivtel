@@ -29,7 +29,7 @@ $(document).ready(function() {
         Swal.fire({
           icon: 'error',
           title: 'Erreur!',
-          text: 'Une erreur est survenue lors de l\'enregistrement de la spécialité.',
+          text: 'La valeur est deja dans la base de données .',
           background: '#dc3545'
         });
       }
