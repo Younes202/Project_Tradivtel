@@ -43,5 +43,4 @@ class Technician(models.Model):
     def __str__(self):
         return self.fullname
 
-    def get_equipes(self):
-        return ', '.join([str(equipe) for equipe in self.equipe_set.all()])
+

@@ -71,8 +71,6 @@
 						<thead>
 							<tr>
 								<th style="font-size: 20px;"> Nom de L'Equipe </th>
-								<th style="font-size: 20px;"> Technician </th>
-                                <th style="font-size: 20px;"> Specialite </th>
                                 <th style="font-size: 20px;"> Action </th>
 							</tr>
 						</thead>
@@ -83,10 +81,8 @@
       {% if forloop.first or technician.equipe != technicians.first.equipe %}
         <td rowspan="{{ technician.equipe.technicians.count }}">{{ technician.equipe.name }}</td>
       {% endif %}
-
-		<td>{{ technician.fullname }}</td>
-      <td> {{ technician.specialite }}</td>
       <td>
+	   <button class="btn btn-success">Liste des technicians </button>
         <button class="btn btn-primary" >Ajouter</button>
         <button class="btn btn-danger">Supprimer</button>
         <button class="btn btn-warning">Modifier</button>

@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.checks import messages
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_http_methods
@@ -60,11 +61,10 @@ def technician(request):
 
 
 def tache(request):
-    equipes = Equipe.objects.all();
-    technicians = Technician.objects.all()
+    equipes = Equipe.objects.annotate(num_technicians=Count('technicians'))
     equipes_number = Equipe.objects.count()
-
-    context = {'equipes': equipes, 'technicians': technicians, 'equipes_number': equipes_number}
+    technicians = Technician.objects.all()
+    context = {'equipes': equipes, 'technicians': technicians, 'equipes_number': equipes_number, 'equipes': equipes}
     return render(request, 'HTML/DASHBOARD/pages/Taches/tache.html', context)
 
 
@@ -91,9 +91,7 @@ def add_equipe(request):
     if request.method == 'POST':
         equipe_name = request.POST['name']
         technician_ids = request.POST.getlist('technicians')
-        equipe = Equipe.objects.filter(name=equipe_name).first()
-        if equipe is None:
-            equipe = Equipe.objects.create(name=equipe_name)
+        equipe = Equipe.objects.create(name=equipe_name)
         for technician_id in technician_ids:
             technician = Technician.objects.get(id=technician_id)
             if technician.equipe is None:

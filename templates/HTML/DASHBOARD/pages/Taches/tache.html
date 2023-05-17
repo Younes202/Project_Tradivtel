@@ -61,22 +61,17 @@
       <!-- Table Speciality -->
       			<div class="table-data">
 				<div class="order">
-					<div class="head">
-						<h3>Equipe</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
 
-					<table>
-						<thead>
-							<tr>
-								<th style="font-size: 20px;"> Nom de L'Equipe </th>
-								<th style="font-size: 20px;"> Technician </th>
-                                <th style="font-size: 20px;"> Specialite </th>
-                                <th style="font-size: 20px;"> Action </th>
-							</tr>
-						</thead>
-<tbody>
+
+					 <table>
+    <thead>
+      <tr>
+        <th style="font-size: 20px;"> Nom de l'équipe </th>
+        <th style="font-size: 20px;"> Nombre de techniciens </th>
+        <th style="font-size: 20px;"> Action </th>
+      </tr>
+    </thead>
+  <tbody>
   {% for technician in technicians %}
     <tr>
 
@@ -99,10 +94,8 @@
 
 
 
-
-
-					</table>
-				</div>
+  </table>
+</div>
 							</div>
 				<!--Speciality table !-->
 							<div class="table-data">
@@ -136,6 +129,10 @@
 
 	  <!-- Modal for adding a new equipe -->
       {% include 'HTML/DASHBOARD/pages/Taches/equipes/add_equipe.html' %}
+      <!-- Modal for adding technicians in the current equipe  -->
+        {% include 'HTML/DASHBOARD/pages/Taches/equipes/add-technician-equipe.html' %}
+
+
         	     <!-- notification js sweetAlert-->
       {% include 'js/toastrs/insertion_toastr.js' %}
 
